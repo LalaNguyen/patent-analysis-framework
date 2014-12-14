@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # src documentation build configuration file, created by
-# sphinx-quickstart on Sun Dec 14 12:17:50 2014.
+# sphinx-quickstart on Sun Dec 14 13:33:51 2014.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -19,7 +19,6 @@ import os
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
-sys.path.insert(0, os.path.abspath('/Users/mac/Development/env/patent_project/src/'))
 
 # -- General configuration ------------------------------------------------
 
@@ -47,15 +46,15 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Patent Analysis Framework'
-copyright = u'2014, Minh Hoang Nguyen'
+project = u'src'
+copyright = u'2014, Author'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The short X.Y version.
-version = '0.1'
+version = ''
 # The full version, including alpha/beta/rc tags.
 release = ''
 
