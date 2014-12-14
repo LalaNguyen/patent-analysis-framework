@@ -12,7 +12,7 @@ NEO4J_URL="http://localhost:7474/db/data"
 MAX_NUMBER_OF_PATENTS = True 
 NUMBER_OF_PATENTS = 200 
 NUMBER_OF_STEPS = 10
-http.socket_timeout = 9999
+#http.socket_timeout = 9999
 #watch("httpstream")
 
 #Patent Handler create Handler to hold formatted data that are parsed from xml file     
