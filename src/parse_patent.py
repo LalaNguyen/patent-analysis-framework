@@ -5,8 +5,6 @@ import sys, getopt
 import xml.sax
 import time
 import json
-from py2neo import Graph, watch
-from py2neo.packages.httpstream import http
 import copy
 
 #Define settings and global variables
