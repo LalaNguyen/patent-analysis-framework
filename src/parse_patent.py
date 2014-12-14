@@ -15,8 +15,27 @@ NUMBER_OF_STEPS = 10
 #http.socket_timeout = 9999
 #watch("httpstream")
 
-#Patent Handler create Handler to hold formatted data that are parsed from xml file     
+    
 class PatentHandler(xml.sax.ContentHandler):
+    """Patent Handler create Handler to hold formatted data that are parsed from xml file. 
+    
+    Current support XML tags:
+    
+    <us-patent-grant>
+    <date-publ>
+    <file>
+    <country>
+    <us-citation>
+    <publication-reference>
+    <doc-number>
+    <kind>
+    <inventors>
+    <inventor>
+    <invention-title>
+    <number_of_claims>
+    <us-references-cited>
+        
+    """
     def __init__(self):
         self.CurrentData=""
         self.date_produced=""
@@ -132,12 +151,19 @@ def xml_documents(file_obj):
 
    
 def parse_xml(file_name,size=0,method="json"):
-    """
-    Parse single XML file into the separated XML instances.
-    :param file_name: Name of file within same level as root.
-    :param size: Number of XML instances within XML file to be read.
-    :param method: Export method(Default:Json).
-    return: Boolean
+    """Parse single XML file into the separated XML instances.
+    
+    Args:
+        :param file_name(str): Name of file within same level as root.
+        :param size(int): Number of XML instances within XML file to be read.
+        :param method(str): Export method(Default:Json).
+    
+    Returns: 
+    int.  The return code::
+
+             0 -- Success!
+             1 -- No good.
+             2 -- Try again.
     """
     # Set initial values
     count=0
@@ -177,6 +203,7 @@ def parse_xml(file_name,size=0,method="json"):
         print '\bOK] - ', count, ' patents in ', time.time()-start
         if method == "json":
             export2json(results)
+        return 0
                        
     except IOError as e:
         raise e
