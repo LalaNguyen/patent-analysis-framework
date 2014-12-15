@@ -25,12 +25,10 @@ class PatentHandler(xml.sax.ContentHandler):
     <date-publ>
     <file>
     <country>
-    <us-citation>
     <publication-reference>
     <doc-number>
     <kind>
-    <inventors>
-    <inventor>
+    <addressbook>
     <invention-title>
     <number_of_claims>
     <us-references-cited>
@@ -60,10 +58,11 @@ class PatentHandler(xml.sax.ContentHandler):
             self.date_publ = attributes["date-publ"]
             self.application_number = attributes["file"]
             self.country = attributes["country"]
-        if tag=="publication-reference" or tag=="us-citation" or tag=="inventor" or tag =="invention-title" or tag=="number-of-claims":
+        if tag=="publication-reference" or tag=="patcit" or tag=="inventor" or tag =="invention-title" or tag=="number-of-claims":
             #We found what we want, set our stack ready
             self.enable_stack=True
-
+        if tag=="nplcit":
+            self.enable_stack=False
     # Call when a character is read
     def characters(self, content):
         #Stack only stores opening tag and value, just ignore
@@ -81,26 +80,38 @@ class PatentHandler(xml.sax.ContentHandler):
             # assign doc-number and kind before clearing stack
             self.doc_number=self.stack['doc-number']
             self.kind=self.stack['kind']
-            #self.citation_list.clear() 
             self.stack.clear()
          
         if tag == "inventor":
+            self.stack.pop("addressbook")
+            self.stack.pop("address")
+            if "state" in self.stack:
+                self.stack.pop("state")
+            self.stack.pop("inventor")
             self.inventor_list.append(self.stack.copy())
             self.stack.clear()
             
         # Once end of tag us-citation, clear the citation list
-        if tag=="us-citation":
+        if tag=="patcit":
+            self.stack.pop("classification-national",None)
+            self.stack.pop("us-citation",None)
+            self.stack.pop("kind",None)
+            self.stack.pop("name",None)
+            self.stack.pop("date",None)
+            self.stack.pop("patcit",None)
+            self.stack.pop("category",None)
+            self.stack.pop("main-classification",None)
+            self.stack.pop("country",None)
+            self.stack.pop("classification-cpc-text",None)
+            self.stack.pop("document-id",None)
             # insert list back to dictionary
             self.citation_list.append(self.stack.copy())
             self.stack.clear()
             
+            
         if tag=="us-references-cited":
             self.enable_stack=False
             self.stack.clear()           
-             
-        if tag=="inventors" :
-            self.enable_stack=False
-            self.stack.clear()
     
         if tag=="invention-title":
             self.enable_stack=False
@@ -112,8 +123,7 @@ class PatentHandler(xml.sax.ContentHandler):
             self.enable_stack=False
             self.number_of_claims= self.stack["number-of-claims"]
             self.stack.clear()
-            
-                   
+                         
     # Reset everything to initial state.
     def reset(self):
         self.inventor_list[:]=[]
@@ -124,14 +134,14 @@ class PatentHandler(xml.sax.ContentHandler):
     
     # Construct Json to work with various database format    
     def serialization(self):
-        results={}
-        results["doc_number"]=self.doc_number.encode('UTF-8','replace')
-        results["invention_title"]=self.invention_title.encode('UTF-8','replace')
-        results["date_produced"] = self.date_produced.encode('UTF-8','replace')
+        results={}        
+        results["doc-number"]=self.doc_number.encode('UTF-8','replace')
+        results["invention-title"]=self.invention_title.encode('UTF-8','replace')
+        results["date-produced"] = self.date_produced.encode('UTF-8','replace')
         results["country"] = self.country.encode('UTF-8','replace')
-        results["date_published"]=self.date_publ.encode('UTF-8','replace')
-        results["application_number"]=self.application_number.encode('UTF-8','replace')
-        results["number_of_claims"]=self.number_of_claims.encode('UTF-8','replace')
+        results["date-published"]=self.date_publ.encode('UTF-8','replace')
+        results["application-number"]=self.application_number.encode('UTF-8','replace')
+        results["number-of-claims"]=self.number_of_claims.encode('UTF-8','replace')
         results["kind"]=self.kind.encode('UTF-8','replace')
         results["inventors"]=self.inventor_list
         results["citations"]=self.citation_list
@@ -146,6 +156,7 @@ def xml_documents(file_obj):
                 yield ''.join(document)
                 document = []
         document.append(line)
+        #print line
     if document:
         yield ''.join(document)
 
@@ -208,16 +219,26 @@ def parse_xml(file_name,size=0,method="json"):
     except IOError as e:
         raise e
         
-def export2json(results):
-    """
-    This method take in results and paste it to json file
+def export2json(data):
+    """Export to json file
+    
+    Args:
+        :param data(list): data list to be exported.
+        
+    Returns: 
+    int.  The return code::
+
+             0 -- Success!
+             1 -- No good.
+             2 -- Try again.
     """
     print 'Dumping to json [ ]',
     print '\b'*3,
     sys.stdout.flush()    
     with open('data.json', 'w') as outfile:
-        json.dump(results, outfile,indent=4,ensure_ascii=False)
+        json.dump(data, outfile,indent=4,ensure_ascii=False)
         print'\bOK] - ', 'saved to data.json' 
+    return 0
 
 def main(argv):
     # define local variables
