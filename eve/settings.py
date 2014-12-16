@@ -8,7 +8,7 @@ MONGO_PORT = 27017
 MONGO_USERNAME = 'lala'
 MONGO_PASSWORD = '1234'
 MONGO_DBNAME = 'patentdb'
-
+MONGO_QUERY_BLACKLIST = ['$where'] 
 # Enable reads (GET), inserts (POST) and DELETE for resources/collections
 # (if you omit this line, the API will default to ['GET'] and provide
 # read-only access to the endpoint).
@@ -67,26 +67,22 @@ patent_schema = {
         'country': {
             'type':'string'
         }, 
-        'doc-number': {
-            'type':'string', 
+        'patid': {
+            'type':'string',
             'required':True,
+            'unique':True
         }, 
-        'invention-title': {
+        'title': {
             'type':'string'
         },
-        'application-number': {
+        'app-number': {
             'type':'string'
         }, 
         'citations':{
             'type':'list',
             'schema':{
-                'type':'dict',
-                'schema':{
-                    'doc-number':{
-                        'type':'string',
-                    }
-                }
-            }
+                       'type':'string'
+                   }
         },
         'date-produced':{
             'type':'string'
@@ -129,11 +125,11 @@ inventor_schema={
     
 }
 inventors = {
-    'item_title': 'inventor',
-#    'additional_lookup': {
-#        'url': 'regex("[\w.+\-]")',
-#        'field': 'first-name'
-#    },
+    #'item_title': 'inventor',
+   # 'additional_lookup': {
+  #      'url': 'regex("[\w]+")',
+   #     'field': 'first-name'
+   # },
     'cache_control': 'max-age=10,must-revalidate',
     'cache_expires': 10,
 
@@ -147,16 +143,15 @@ patents = {
     # 'title' tag used in item links. Defaults to the resource title minus
     # the final, plural 's' (works fine in most cases but not for 'people')
     'item_title': 'patent',
-
     # by default the standard item entry point is defined as
     # '/people/<ObjectId>'. We leave it untouched, and we also enable an
     # additional read-only entry point. This way consumers can also perform
     # GET requests at '/people/<lastname>'.
-#    'additional_lookup': {
-#       'url': 'regex("[\w.+\-]")',
-#        'field': 'doc-number'
-#    },
-
+    'additional_lookup': {
+         'url': 'regex("[\w]+")',
+         'field': "patid"
+     },
+  
     # We choose to override global cache-control directives for this resource.
     'cache_control': 'max-age=10,must-revalidate',
     'cache_expires': 10,

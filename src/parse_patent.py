@@ -1,11 +1,19 @@
 #!/usr/bin/env python
 
+"""
+    parse-patent
+    ~~~~~~~~~~~~~~~
+    Work with specific xml 4.5 DTD of US patents.
+    
+"""
+
 import cStringIO
 import sys, getopt
 import xml.sax
 import time
 import json
 import copy
+import re
 
 #Define settings and global variables
 NEO4J_URL="http://localhost:7474/db/data"
@@ -17,7 +25,7 @@ NUMBER_OF_STEPS = 10
 
     
 class PatentHandler(xml.sax.ContentHandler):
-    """Patent Handler create Handler to hold formatted data that are parsed from xml file. 
+    """Patent Handler creates a handler to hold formatted data that are parsed from xml file. 
     
     Current support XML tags:
     
@@ -69,7 +77,8 @@ class PatentHandler(xml.sax.ContentHandler):
         #the closing tag
         if self.enable_stack:
             if self.CurrentData not in self.stack:
-                self.stack[self.CurrentData]=content.encode('UTF-8','replace')         
+                # Remove special characters
+                self.stack[self.CurrentData]=re.sub('[/]','', content.encode('UTF-8','replace'))      
             
     # Call when an element ends
     def endElement(self, tag):
@@ -135,21 +144,29 @@ class PatentHandler(xml.sax.ContentHandler):
     # Construct Json to work with various database format    
     def serialization(self):
         results={}        
-        results["doc-number"]=self.doc_number.encode('UTF-8','replace')
-        results["invention-title"]=self.invention_title.encode('UTF-8','replace')
+        results["patid"]=(self.doc_number.encode('UTF-8','replace')).strip("/")
+        results["title"]=self.invention_title.encode('UTF-8','replace')
         results["date-produced"] = self.date_produced.encode('UTF-8','replace')
         results["country"] = self.country.encode('UTF-8','replace')
         results["date-published"]=self.date_publ.encode('UTF-8','replace')
-        results["application-number"]=self.application_number.encode('UTF-8','replace')
+        results["app-number"]=self.application_number.encode('UTF-8','replace')
         results["number-of-claims"]=self.number_of_claims.encode('UTF-8','replace')
         results["kind"]=self.kind.encode('UTF-8','replace')
         results["inventors"]=self.inventor_list
         results["citations"]=self.citation_list
         return results
         
-# This function will split combined xml file into separated xml files. 
-# Prototype: xml_documents (arg1:file_object)
+
 def xml_documents(file_obj):
+    """Split large xml file into separated xml instance
+    
+    Args:
+        :param file_obj(file_object): a handler to large xml file.
+    
+    Returns: 
+        :param document(str): document form of each xml instance.
+        
+    """
     document = []
     for line in file_obj:
         if line.strip().startswith('<?xml') and document:
@@ -195,7 +212,7 @@ def parse_xml(file_name,size=0,method="json"):
             print 'Start processing [ ]',
             print '\b'*3,
             sys.stdout.flush()
-            spinner = spinning_cursor()
+            spinner = _spinning_cursor()
             for xml_part in xml_documents(citation):
                 sys.stdout.write(spinner.next())
                 # Cast string back to file-like object to parse
@@ -208,7 +225,7 @@ def parse_xml(file_name,size=0,method="json"):
                 # Clean up stack after processing one xml paragraph
                 xml_patent_handler.reset()
                 sys.stdout.flush()
-                time.sleep(0.1)
+                time.sleep(0)
                 sys.stdout.write('\b')
                 sys.stdout.flush()
         print '\bOK] - ', count, ' patents in ', time.time()-start
@@ -232,7 +249,7 @@ def export2json(data):
              1 -- No good.
              2 -- Try again.
     """
-    print 'Dumping to json [ ]',
+    print '- Dumping to json [ ]',
     print '\b'*3,
     sys.stdout.flush()    
     with open('data.json', 'w') as outfile:
@@ -250,10 +267,10 @@ def main(argv):
         opts, args = getopt.getopt(argv,"hi:",["input=","size=","export=","help"])        
         #Empty input, raise error
         if opts ==[]:
-            print '[Usage:] parse_patent.py -i=<inputfile.xml> -s=<number_of_xmls> -e=<export_type>'
+            print '[Usage:] parse_patent.py --i=<inputfile.xml> --s=<number_of_xmls> --e=<export_type>'
             sys.exit(2)
     except getopt.GetoptError:
-        print '[Usage:] parse_patent.py -i=<inputfile.xml> -s=<number_of_xmls> -e=<export_type>'
+        print '[Usage:] parse_patent.py --i=<inputfile.xml> --s=<number_of_xmls> --e=<export_type>'
         sys.exit(2)
     for opt, arg in opts:
         if opt == '--help':
@@ -272,7 +289,7 @@ def main(argv):
             
     parse_xml(inputfile,size, method)
 
-def spinning_cursor():
+def _spinning_cursor():
     while True:
         for cursor in '|/-\\':
             yield cursor
