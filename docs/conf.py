@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # src documentation build configuration file, created by
-# sphinx-quickstart on Mon Dec 15 11:29:00 2014.
+# sphinx-quickstart on Wed Dec 17 10:46:05 2014.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -46,8 +46,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Pantafra'
-copyright = u'2014, Minh Hoang Nguyen'
+project = u'src'
+copyright = u'2014, Author'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

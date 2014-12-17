@@ -1,8 +1,7 @@
 """
-    mongodb-client
+    db-client
     ~~~~~~~~~~~~~~~
-    Based on eve-mongodb-client-demo of Nicola, provides more functions to work with
-    specific xml 4.5 DTD of US patents. 
+    Provides more functions to work with specific xml 4.5 DTD of US patents. 
 
 """
 from eve import Eve
@@ -16,11 +15,24 @@ import time, sys
 
 ENTRY_POINT = 'http://localhost:5000'
 FILE_NAME ="data.json"   
+NEO4J_DATABASE = 'http://localhost:7474/db'
 
 class HTTPService(object):
     
     def __init__(self,entry):
         self.entry_point=entry
+        
+    def _get(self,resource):
+        """Perform the actual GET.
+    
+        Args:
+            :param resource(str): endpoint of connection. E.g people, inventors
+    
+        Returns: 
+            :param r(dict): json object of the response
+        """
+        r = requests.get(self.endpoint(resource))
+        return r.json()
         
     def _post(self,resource, data):
         """Perform the actual POST.
@@ -69,16 +81,16 @@ class HTTPService(object):
         Returns: 
             :param r(dict): json object of the response
         """
+        print self.endpoint(resource)
         r = requests.get(self.endpoint(resource))
-        return r.json()
+        return r
         
     def _find(self,resource,query):
         resource = self.entry_point+'/'+resource+query
         r = requests.get(resource)
         return r.json()
-    
-               
-class MongoDBConnector(HTTPService):
+        
+class Neo4jDBConnector(HTTPService):
     """Create connector that wraps around HTTP methods before 
        forwarding to actual HTTP services for communication with 
        different database rest api.
@@ -92,10 +104,153 @@ class MongoDBConnector(HTTPService):
     * ``findID``
 
     """
+        
+    def get(self,resource):
+       """Perform the actual GET.
+   
+       Args:
+           :param resource(str): endpoint of connection. E.g people, inventors
+   
+       Returns: 
+           :param r(dict): json object of the response
+       """
+       r = self._get(resource)
+       return r
+       
+    def post(self,data,resource,label):
+        """POST bulk of list, also work with single list.
     
+        Args:
+            :param data(list): list of patent data that are parsed from json.
+            :param resource(str): endpoint of connection. E.g people, inventors
+            :param label(str): Label of node. E.g People, Patent
     
-    def __init__(self,entry):
-        self.entry_point=entry
+        Returns: 
+            :param r(int): status_code
+            
+        """
+        start = time.time()
+        print 'Preparing data for Neo4j DB server [ ]',
+        print '\b'*3,
+        sys.stdout.flush()
+        spinner = _spinning_cursor()
+        count = 0;
+        # Begin transaction
+        if label == "Inventor":
+            statements = []
+            for i in range(len(data)):                
+                for item in data[i]["inventors"]:                    
+                    s1="MERGE (a:Inventor {first_name:\"%s\",last_name:\"%s\", city:\"%s\", country:\"%s\"})" %(item['first-name'],item['last-name'],item['city'],item['country'])
+                    s2="MERGE (b:Patent{patid:\"%s\"})" %data[i]["patid"]
+                    s3="MERGE (a)-[:INVENT]->(b)"
+                    s = s1+s2+s3   
+                    query = {
+                        "statement": s,                             
+                    }
+                    count = count +1
+                    sys.stdout.write(spinner.next())
+                    statements.append(query)
+                    sys.stdout.flush()
+                    time.sleep(0)
+                    sys.stdout.write('\b')
+                    sys.stdout.flush()
+            print ' \bOK] -  ', count, ' inventor statements created  in ', time.time()-start
+            statements = {"statements":statements}
+            start = time.time()
+            print 'Posting statements to Neo4j DB server [ ]',
+            print '\b'*3,
+            sys.stdout.flush()
+            a = self._post(resource+"/commit",statements)
+            if not a.json()["errors"]:
+                print '\bOK] -  ', 'Completed in ', time.time()-start
+            else:
+                print '\bERROR] -  ', a.json()["errors"][0]["message"]
+            
+        if label == "Patent":
+            statements = []
+            for i in range(len(data)):                
+                for item in data[i]["citations"]:                    
+                    s1="MERGE (c:Patent{patid:\"%s\"})" % item["doc-number"]
+                    s2="MERGE (p:Patent{patid:\"%s\"})" % data[i]["patid"]
+                    s3="MERGE (c)-[r:CITEDBY]->(p)"
+                    s = s1+s2+s3   
+                    query = {
+                        "statement": s,                             
+                    }
+                    count = count +1
+                    sys.stdout.write(spinner.next())
+                    statements.append(query)
+                    sys.stdout.flush()
+                    time.sleep(0)
+                    sys.stdout.write('\b')
+                    sys.stdout.flush()
+            print ' \bOK] -  ', count, ' patent statements created  in ', time.time()-start
+            statements = {"statements":statements}
+            start = time.time()
+            print 'Posting statements to Neo4j DB server [ ]',
+            print '\b'*3,
+            sys.stdout.flush()
+            a = self._post(resource+"/commit",statements)
+            if not a.json()["errors"]:
+                print '\bOK] -  ', 'Completed in ', time.time()-start
+            else:
+                print '\bERROR] -  ', a.json()["errors"][0]["message"]
+            #print a.json()
+        return 0
+        
+    def findID(self,resource,key, label):
+        """Return document of specific ID from a resource.
+    
+        Args:
+            :param resource(str): endpoint of connection. E.g people, inventors
+            :param key(str): an ID of document within resource/collection.
+            
+        Returns: 
+            :param r(dict): json object of the response
+            
+        """
+        s = "MATCH (p:%s { patid:{key}}) RETURN p" %label
+        query = {
+            "query" : s,
+            "params" : {
+                "key":key
+            }
+        }
+        r = self._post(resource,query)
+        return r
+        
+    def removeDuplication(self,data):
+        """Remove duplicated data from list.
+    
+        Args:
+            :param data(list): list of cited patent data that are parsed from json.
+    
+        Returns: 
+            :param r(dict): set of cited patents
+            
+        """
+        data=list(set(data))
+        keys=[]
+        r=[]
+        for k in range(len(data)):
+            keys.append("patid")
+            r.append(dict(izip(keys,data)))
+        return r
+       
+class MongoDBConnector(HTTPService):
+    """Create connector that wraps around HTTP methods before 
+       forwarding to actual HTTP services for communication with 
+       MongoDB database rest api. Based on eve-mongodb-client-demo of Nicola.
+    
+    Public functions:
+    
+    * ``post``
+    
+    * ``get``
+    
+    * ``findID``
+
+    """
         
         
     def post(self,data,resource):
@@ -115,18 +270,17 @@ class MongoDBConnector(HTTPService):
         print 'Checking duplicated cited patents [ ]',
         print '\b'*3,
         sys.stdout.flush()
+        dummy=[]
         spinner = _spinning_cursor()
         if resource=="patents":
-            dummy=[]          
             for i in range(len(data)):
                 citation_list=[]
-                
                 for item in data[i]["citations"]:
                     val= item.values()
                     citation_list.extend(val)
                     # Create dummy variable for citation ID so we can make link later
                     # Check if the patent is already exist
-                    r = self.findID(resource=resource,patid=val[0])
+                    r = self.findID(resource=resource,key=val[0])
                     # If found
                     sys.stdout.write(spinner.next())
                     count = count +1
@@ -144,7 +298,7 @@ class MongoDBConnector(HTTPService):
         
         print ' \bOK] -  ', count, ' cited patents in ', time.time()-start
         start = time.time()        
-        print '- Posting to DB server [ ]',
+        print '- Posting documents to MongoDB server [ ]',
         print '\b'*3,
         
         spinner = _spinning_cursor()
@@ -165,7 +319,7 @@ class MongoDBConnector(HTTPService):
         print '\b'*3,
         sys.stdout.flush()
         for i in range(len(data)):
-            resp = self.findID(resource=resource,patid=data[i]["patid"])
+            resp = self.findID(resource=resource,key=data[i]["patid"])
             # Not found
             sys.stdout.write(spinner.next())
             count = count +1
@@ -179,7 +333,7 @@ class MongoDBConnector(HTTPService):
                 pass
         print ' \bOK] -  Completed in ',  time.time()-start
         start = time.time()
-        print '- Posting to DB server [ ]',
+        print '- Posting documents to MongoDB server [ ]',
         print '\b'*3,
         spinner = _spinning_cursor()
         valids = []
@@ -249,9 +403,11 @@ def _spinning_cursor():
                     
 if __name__ == '__main__':
     # Initiate Connector
-    client=MongoDBConnector(ENTRY_POINT)
+    mongo_client=MongoDBConnector(ENTRY_POINT)
     data=[]
     inventors=[]
+    neo_client=Neo4jDBConnector(NEO4J_DATABASE)
+    #a=client.get("data")
     # Open file to read
     with open(FILE_NAME) as file:
         # Parse json file to Element Tree
@@ -259,17 +415,20 @@ if __name__ == '__main__':
         # Build up our list data to post from
         for o in objects:
             data.append(o)
-            inventors.extend(o["inventors"])
-            
+        neo_r = neo_client.post(data=data,resource="data/transaction",label="Patent")
+        neo_r = neo_client.post(data=data,resource="data/transaction",label="Inventor")   
         # Example APIs
         #di = client._delete_all("inventors")
-        #dp = client._delete_all("patents")
+        #mongo_dp = mongo_client._delete_all("patents")
         
             
-        r = client.post(data=data,resource="patents")
+        #mongo_r = mongo_client.post(data=data,resource="patents")
 
          
-        #i = client.post(data=inventors,resource="inventors")
-        query='?where={"citations": {"$regex": ".*2003/0001416.*"}}'
+        mongo_r = mongo_client.post(data=data,resource="patents")
+        
+        #query='?where={"citations": {"$regex": ".*2003/0001416.*"}}'
         #g=client.find("patents",query)
+     #NEo4j
+     
      
