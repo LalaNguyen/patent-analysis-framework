@@ -6,13 +6,6 @@ Proposed framework for extracting and analyzing Patent data using Neo4j and Mong
 - Nguyen Hoang Minh (minh.ng0611@gmail.com), Dec 2014
 - Chiem Thach Phat (thachphat0@gmail.com), Dec 2014
 
-#Project structures
-docs: 
-eve:
-README.md:
-requirements.txt:
-src: source code folder
-
 #Installation
 To install required modules, please use the following command:
 
