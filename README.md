@@ -37,7 +37,29 @@ You can insert data into Neo4j or MongoDB using the following command:
 ```python db_client.py```
 
 This module will get the data from 'data.json' in the working folder and parse directly to database using REST API.
-Caution: You must start Neo4j and MongoDB server before execute this module, otherwise, it will raise error.
+
+Caution: You must start Neo4j, Eve and MongoDB server before execute this module, otherwise, it will raise error.
+
+To start Neo4j: ./path/to/neo4j/bin/neo4j start
+
+To start Eve: python /path/to/eve/run.py
+
+To start MongoDB: ./path/to/mongodb/bin/mongod
+
+##Extract data from XML using lxml and insert data to Neo4j using Object Graph Mapping (Py2neo)
+You can extract data from XML using lxml and insert data to Neo4j using Py2neo by using the following command:
+
+```python xmlParser.py -i=<inputfile.xml> -o=<outputfile> -s=<number_of_xmls> <-p>```
+
+xmlParser.py is located at src/ogm
+
+######Arguments
+```
+inputfile.xml	--	Path to input file
+number_of_xmls	--	Number of patents want to parse
+outputfile		--	Path to output file
+-p				--	Parse data to Neo4j (if not mentioned, xmlParser just read the whole xml file without inserting data to Neo4j
+```
 
 ##Generate csv from Neo4j database
 You can generate nodes and relationships from Neo4j database into two .csv file by using the following command:
