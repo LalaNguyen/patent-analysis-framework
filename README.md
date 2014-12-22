@@ -40,11 +40,11 @@ This module will get the data from 'data.json' in the working folder and parse d
 
 Caution: You must start Neo4j, Eve and MongoDB server before execute this module, otherwise, it will raise error.
 
-To start Neo4j: ./path/to/neo4j/bin/neo4j start
+To start Neo4j: ```./path/to/neo4j/bin/neo4j start```
 
-To start Eve: python /path/to/eve/run.py
+To start Eve: ```python /path/to/eve/run.py```
 
-To start MongoDB: ./path/to/mongodb/bin/mongod
+To start MongoDB: ```./path/to/mongodb/bin/mongod```
 
 ##Extract data from XML using lxml and insert data to Neo4j using Object Graph Mapping (Py2neo)
 You can extract data from XML using lxml and insert data to Neo4j using Py2neo by using the following command:
