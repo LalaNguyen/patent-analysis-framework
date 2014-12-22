@@ -19,11 +19,12 @@ To install required modules, please use the following command:
 ```pip install -r /path/to/requirements.txt```
 
 Neo4j must be installed. For further information, please refer to http://neo4j.com/docs/stable/server-installation.html
+
 MongoDB must be installed. For further information, please refer to http://docs.mongodb.org/manual/installation/
 
 #Usage
 ##Patent resources
-For XML patent file you can download from http://www.google.com/googlebooks/uspto-patents-grants- text.html
+For XML patent file you can download from http://www.google.com/googlebooks/uspto-patents-grants-text.html
 
 ##Extract data from XML
 You can extract data from XML by using the following command:
