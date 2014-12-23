@@ -55,7 +55,7 @@ xmlParser.py is located at src/ogm
 
 ######Arguments
 ```
-inputfile.xml	--	Path to input file
+inputfile.xml	--	Path to input file.
 number_of_xmls	--	Number of patents want to parse
 outputfile		--	Path to output file
 -p				--	Parse data to Neo4j (if not mentioned, xmlParser just read the whole xml file without inserting data to Neo4j
@@ -67,4 +67,9 @@ You can generate nodes and relationships from Neo4j database into two .csv file 
 ```python generate_csv.py```
 
 Caution: You must start Neo4j server first
+
+##Other Info
+
+For API documentations, please refer to http://patent-analysis-framework.readthedocs.org/en/latest/
+
 
