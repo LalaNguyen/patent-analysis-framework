@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  22 DEC 2014 13:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  23 DEC 2014 11:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -417,28 +417,22 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \c@lstlisting=\count127
-LaTeX Font Info:    Try loading font information for U+msa on input line 151.
+LaTeX Font Info:    Try loading font information for U+msa on input line 150.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 151.
+LaTeX Font Info:    Try loading font information for U+msb on input line 150.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 151.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 150.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-Overfull \hbox (1.0793pt too wide) in paragraph at lines 153--162
-\T1/aer/m/it/9 Prepar-ing ACM SIG Pro-ceed-ings Us-ing L[]T[]X$\OT1/cmr/m/n/9 2
-[]$ \T1/aer/m/it/9 and BibT[]X\T1/aer/m/n/9 .
- []
-
-
-Overfull \hbox (5.11728pt too wide) in paragraph at lines 208--209
+Overfull \hbox (5.11728pt too wide) in paragraph at lines 186--187
 \T1/aer/m/n/9 Patent Grants and Patent Ap-pli-ca-tion Pub-li-ca-tion, are parse
 d
  []
@@ -447,39 +441,49 @@ d
 
 
 ]
-Overfull \hbox (3.43576pt too wide) in paragraph at lines 232--233
+Overfull \hbox (3.43576pt too wide) in paragraph at lines 210--211
 []\T1/aer/m/n/9 It's im-por-tant to note that CINAS is de-signed to be DBMS-
  []
 
-[2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 341--341
+[2]
+Overfull \hbox (2.04567pt too wide) in paragraph at lines 233--233
+[][]\T1/aer/m/n/9 http://blog.mongodb.org/post/72874267152/transitioning-
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 319--319
 [][]\T1/aer/m/n/9 http://searchsoa.techtarget.com/feature/Gartner-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 341--341
+Underfull \hbox (badness 10000) in paragraph at lines 319--319
 \T1/aer/m/n/9 analyst-REST-APIs-gain-added-importance-in-application-
  []
 
-<restapi.png, id=25, 739.76375pt x 326.21875pt>
+<restapi.png, id=22, 739.76375pt x 326.21875pt>
 File: restapi.png Graphic file (type png)
  <use restapi.png>
-Package pdftex.def Info: restapi.png used on input line 344.
+Package pdftex.def Info: restapi.png used on input line 322.
 (pdftex.def)             Requested size: 7397.61932pt x 3262.17941pt.
 
-Overfull \hbox (4.99373pt too wide) in paragraph at lines 352--353
+Overfull \hbox (2.71535pt too wide) in paragraph at lines 329--330
+[]\T1/aer/m/n/9 Switching some data from Neo4J to Mon-goDB or shard-
+ []
+
+
+Overfull \hbox (4.99373pt too wide) in paragraph at lines 330--331
 []\T1/aer/m/n/9 Providing mid-dle layer would also en-hance rate-limiting,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 357--357
+Underfull \hbox (badness 10000) in paragraph at lines 335--335
 [][]\T1/aer/m/n/9 http://stackoverflow.com/questions/26031795/resultset-
  []
 
-[4 <./restapi.png>] <erd.png, id=31, 963.6pt x 441.65pt>
+[4 <./restapi.png>] <erd.png, id=28, 963.6pt x 441.65pt>
 File: erd.png Graphic file (type png)
  <use erd.png>
-Package pdftex.def Info: erd.png used on input line 371.
+Package pdftex.def Info: erd.png used on input line 349.
 (pdftex.def)             Requested size: 9635.97656pt x 4416.4891pt.
 Package epstopdf Info: Source file: <conceptual_model.eps>
 (epstopdf)                    date: 2014-12-18 22:43:36
@@ -489,15 +493,15 @@ Package epstopdf Info: Source file: <conceptual_model.eps>
 (epstopdf)                    size: 8324 bytes
 (epstopdf)             Command: <repstopdf --outfile=conceptual_model-eps-conve
 rted-to.pdf conceptual_model.eps>
-(epstopdf)             \includegraphics on input line 379.
+(epstopdf)             \includegraphics on input line 357.
 Package epstopdf Info: Output file is already uptodate.
 
-<conceptual_model-eps-converted-to.pdf, id=32, 392.46625pt x 251.94125pt>
+<conceptual_model-eps-converted-to.pdf, id=29, 392.46625pt x 251.94125pt>
 File: conceptual_model-eps-converted-to.pdf Graphic file (type pdf)
 
 <use conceptual_model-eps-converted-to.pdf>
 Package pdftex.def Info: conceptual_model-eps-converted-to.pdf used on input li
-ne 379.
+ne 357.
 (pdftex.def)             Requested size: 3924.65271pt x 2519.40628pt.
 Package epstopdf Info: Source file: <neo4jgraph.eps>
 (epstopdf)                    date: 2014-12-19 17:15:11
@@ -507,14 +511,14 @@ Package epstopdf Info: Source file: <neo4jgraph.eps>
 (epstopdf)                    size: 5571 bytes
 (epstopdf)             Command: <repstopdf --outfile=neo4jgraph-eps-converted-t
 o.pdf neo4jgraph.eps>
-(epstopdf)             \includegraphics on input line 397.
+(epstopdf)             \includegraphics on input line 375.
 Package epstopdf Info: Output file is already uptodate.
 
-<neo4jgraph-eps-converted-to.pdf, id=33, 365.365pt x 141.52875pt>
+<neo4jgraph-eps-converted-to.pdf, id=30, 365.365pt x 141.52875pt>
 File: neo4jgraph-eps-converted-to.pdf Graphic file (type pdf)
 
 <use neo4jgraph-eps-converted-to.pdf>
-Package pdftex.def Info: neo4jgraph-eps-converted-to.pdf used on input line 397
+Package pdftex.def Info: neo4jgraph-eps-converted-to.pdf used on input line 375
 .
 (pdftex.def)             Requested size: 3653.64105pt x 1415.28397pt.
  [5 <./erd.png> <./conceptual_model-eps-converted-to.pdf> <./neo4jgraph-eps-con
@@ -527,35 +531,35 @@ Package epstopdf Info: Source file: <cinasstruct.eps>
 (epstopdf)                    size: 7265 bytes
 (epstopdf)             Command: <repstopdf --outfile=cinasstruct-eps-converted-
 to.pdf cinasstruct.eps>
-(epstopdf)             \includegraphics on input line 443.
+(epstopdf)             \includegraphics on input line 421.
 Package epstopdf Info: Output file is already uptodate.
 
-<cinasstruct-eps-converted-to.pdf, id=47, 304.13625pt x 239.89626pt>
+<cinasstruct-eps-converted-to.pdf, id=44, 304.13625pt x 239.89626pt>
 File: cinasstruct-eps-converted-to.pdf Graphic file (type pdf)
 
 <use cinasstruct-eps-converted-to.pdf>
-Package pdftex.def Info: cinasstruct-eps-converted-to.pdf used on input line 44
-3.
+Package pdftex.def Info: cinasstruct-eps-converted-to.pdf used on input line 42
+1.
 (pdftex.def)             Requested size: 30.4154pt x 23.99103pt.
 
-<handler.png, id=48, 214.8025pt x 474.77374pt>
+<handler.png, id=45, 214.8025pt x 474.77374pt>
 File: handler.png Graphic file (type png)
  <use handler.png>
-Package pdftex.def Info: handler.png used on input line 451.
+Package pdftex.def Info: handler.png used on input line 429.
 (pdftex.def)             Requested size: 2148.01971pt x 4747.72583pt.
  [6 <./cinasstruct-eps-converted-to.pdf> <./handler.png>]
-<db_client.png, id=57, 417.56pt x 316.18124pt>
+<db_client.png, id=54, 417.56pt x 316.18124pt>
 File: db_client.png Graphic file (type png)
  <use db_client.png>
-Package pdftex.def Info: db_client.png used on input line 470.
+Package pdftex.def Info: db_client.png used on input line 448.
 (pdftex.def)             Requested size: 4175.5896pt x 3161.80466pt.
 
-Overfull \hbox (3.13982pt too wide) in paragraph at lines 478--479
+Overfull \hbox (3.13982pt too wide) in paragraph at lines 456--457
 \T1/aer/m/n/9 case where patent 08852195 ac-tu-ally re-fer to WO2005/069809
  []
 
 
-Overfull \hbox (5.18994pt too wide) in paragraph at lines 494--495
+Overfull \hbox (5.18994pt too wide) in paragraph at lines 472--473
 []\T1/aer/m/n/9 Appending state-ments into query. Then, per-form POST
  []
 
@@ -568,120 +572,137 @@ Package epstopdf Info: Source file: <generate.eps>
 (epstopdf)                    size: 7726 bytes
 (epstopdf)             Command: <repstopdf --outfile=generate-eps-converted-to.
 pdf generate.eps>
-(epstopdf)             \includegraphics on input line 507.
+(epstopdf)             \includegraphics on input line 485.
 Package epstopdf Info: Output file is already uptodate.
 
-<generate-eps-converted-to.pdf, id=63, 339.2675pt x 156.585pt>
+<generate-eps-converted-to.pdf, id=60, 339.2675pt x 156.585pt>
 File: generate-eps-converted-to.pdf Graphic file (type pdf)
 
 <use generate-eps-converted-to.pdf>
-Package pdftex.def Info: generate-eps-converted-to.pdf used on input line 507.
+Package pdftex.def Info: generate-eps-converted-to.pdf used on input line 485.
 (pdftex.def)             Requested size: 256.0748pt x 118.19347pt.
 
-Overfull \hbox (16.0748pt too wide) in paragraph at lines 507--508
+Overfull \hbox (16.0748pt too wide) in paragraph at lines 485--486
  [][] 
  []
 
-<rplot-classification.png, id=64, 676.5275pt x 408.52625pt>
+<rplot-classification.png, id=61, 676.5275pt x 408.52625pt>
 File: rplot-classification.png Graphic file (type png)
 
 <use rplot-classification.png>
-Package pdftex.def Info: rplot-classification.png used on input line 564.
+Package pdftex.def Info: rplot-classification.png used on input line 542.
 (pdftex.def)             Requested size: 256.0748pt x 154.63692pt.
 
-Overfull \hbox (16.0748pt too wide) in paragraph at lines 564--565
+Overfull \hbox (16.0748pt too wide) in paragraph at lines 542--543
  [][] 
  []
 
 
-Overfull \hbox (5.891pt too wide) in paragraph at lines 549--567
+Overfull \hbox (5.891pt too wide) in paragraph at lines 527--545
 \T1/aer/m/n/9 DLING AND SAN-I-TARY EQUIP-MENT (D23) ?and LIGHT-
  []
 
-<citation.png, id=65, 1027.84pt x 1027.84pt>
+<citation.png, id=62, 1027.84pt x 1027.84pt>
 File: citation.png Graphic file (type png)
  <use citation.png>
-Package pdftex.def Info: citation.png used on input line 573.
+Package pdftex.def Info: citation.png used on input line 551.
 (pdftex.def)             Requested size: 256.0748pt x 256.0654pt.
 
-Overfull \hbox (16.0748pt too wide) in paragraph at lines 573--574
+Overfull \hbox (16.0748pt too wide) in paragraph at lines 551--552
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 577--577
+Underfull \hbox (badness 10000) in paragraph at lines 555--555
 [][]\T1/aer/m/n/9 http://en.wikipedia.org/wiki/Force-
  []
 
-<citation-label.png, id=66, 1027.84pt x 1027.84pt>
+<citation-label.png, id=63, 1027.84pt x 1027.84pt>
 File: citation-label.png Graphic file (type png)
  <use citation-label.png>
-Package pdftex.def Info: citation-label.png used on input line 581.
+Package pdftex.def Info: citation-label.png used on input line 559.
 (pdftex.def)             Requested size: 227.62204pt x 227.61543pt.
 
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 585.
-
-
-Overfull \hbox (15.87495pt too wide) in paragraph at lines 586--592
+Overfull \hbox (15.87495pt too wide) in paragraph at lines 564--570
 [][] 
  []
 
-<endcitation.png, id=67, 508.90125pt x 336.25626pt>
+<endcitation.png, id=64, 508.90125pt x 336.25626pt>
 File: endcitation.png Graphic file (type png)
  <use endcitation.png>
-Package pdftex.def Info: endcitation.png used on input line 598.
+Package pdftex.def Info: endcitation.png used on input line 576.
 (pdftex.def)             Requested size: 227.62204pt x 150.40062pt.
 
 [8 <./generate-eps-converted-to.pdf> <./rplot-classification.png>] [9]
-<inventor-map.png, id=79, 657.45625pt x 342.27875pt>
+<inventor-map.png, id=76, 657.45625pt x 342.27875pt>
 File: inventor-map.png Graphic file (type png)
  <use inventor-map.png>
-Package pdftex.def Info: inventor-map.png used on input line 608.
+Package pdftex.def Info: inventor-map.png used on input line 586.
 (pdftex.def)             Requested size: 256.0748pt x 133.31581pt.
 
-Overfull \hbox (16.0748pt too wide) in paragraph at lines 608--609
+Overfull \hbox (16.0748pt too wide) in paragraph at lines 586--587
  [][] 
  []
 
 [10 <./citation.png> <./citation-label.png> <./endcitation.png> <./inventor-map
-.png>]
-No file sig-alternate.bbl.
-LaTeX Font Info:    Try loading font information for T1+aett on input line 700.
+.png>] <line.png, id=84, 655.44875pt x 403.5075pt>
+File: line.png Graphic file (type png)
+ <use line.png>
+Package pdftex.def Info: line.png used on input line 626.
+(pdftex.def)             Requested size: 256.0748pt x 157.64435pt.
 
-(/usr/local/texlive/2014/texmf-dist/tex/latex/ae/t1aett.fd
-File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-) [11]
-(./sig-alternate.aux) ) 
+Overfull \hbox (16.0748pt too wide) in paragraph at lines 626--627
+ [][] 
+ []
+
+[11 <./line.png>]
+Overfull \hbox (105.77153pt too wide) in paragraph at lines 664--668
+\T1/aer/m/n/9 - Data Mod-els" B. Reinero, http://blog.mongodb.org/post/72874267
+152/transitioning-
+ []
+
+
+Overfull \hbox (2.98448pt too wide) in paragraph at lines 664--668
+\T1/aer/m/n/9 from-relational-databases-to-mongodb, Jan 2014 [2] "USPTO
+ []
+
+
+Overfull \hbox (97.94144pt too wide) in paragraph at lines 664--668
+\T1/aer/m/n/9 Q.Liu, http://abel.lis.illinois.edu/UPDC/USPTOPatentsDatabaseCons
+truction.pdf,
+ []
+
+[12
+
+] (./sig-alternate.aux) )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 148 ({)
+### bottom level 
 Here is how much of TeX's memory you used:
- 4670 strings out of 493117
- 64215 string characters out of 6135433
+ 4637 strings out of 493117
+ 63788 string characters out of 6135433
  178214 words of memory out of 5000000
- 7999 multiletter control sequences out of 15000+600000
- 60062 words of font info for 82 fonts, out of 8000000 for 9000
+ 7982 multiletter control sequences out of 15000+600000
+ 52493 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,11n,32p,1206b,1552s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base
-/8r.enc}</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx
-9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.
-pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pf
-b></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><
-/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></us
-r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/l
-ocal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/loc
-al/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local
-/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/t
-exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/tex
-live/2014/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/20
-14/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2014/texm
-f-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fon
-ts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/u
-rw/times/utmri8a.pfb>
-Output written on sig-alternate.pdf (11 pages, 2637837 bytes).
+ 41i,11n,32p,1205b,1552s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.enc
+}</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb><
+/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></u
+sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/
+local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/loc
+al/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/
+texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/te
+xlive/2014/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2
+014/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2014/tex
+mf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2014/texmf-dist/fo
+nts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/
+urw/times/utmri8a.pfb>
+Output written on sig-alternate.pdf (12 pages, 2615423 bytes).
 PDF statistics:
- 138 PDF objects out of 1000 (max. 8388607)
- 88 compressed objects within 1 object stream
+ 127 PDF objects out of 1000 (max. 8388607)
+ 78 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 71 words of extra memory for PDF output out of 10000 (max. 10000000)
 
