@@ -38,13 +38,11 @@
 
 \begin{frame}
 \frametitle{Motivation}
-The world need a citation network for patents to:
+The world needs a citation network for patents to:
 \begin{itemize}
-\item Analyze/Predict competitors trend
-\item Look up whether there is a similar patent or not to submit a new one
-\item Find who invent most patents
-\item Check uniqueness of company's products
-\item Find which products or which patents are most cited by other
+\item Analyzing trending in field
+\item Looking up for the existence of similar patents
+\item Finding who invents most patents
 \end{itemize}
 \end{frame}
 
@@ -57,10 +55,10 @@ The world need a citation network for patents to:
 \end{frame}
 
 \begin{frame}
-\frametitle{Scenario}
-We want to build a citation network for patents with these constraints:
+\frametitle{Analyzing the Scenario}
+We would like to build a citation network for patents with these constraints:
 \begin{itemize}
-\item Able to store and analyze patents from USPTO
+\item Able to store and analyze patents from USPTO bulk data.
 \item A patent contains: an unique Publication Number, Publication Type, Application Number, Publication Date, Filling Date, Priority Date, Fee Status, Title, Length of Grant, Classification and some of its contents include Abstract, Images, Description and Claims
 \item A Patent may or may not cite/be cited other patents
 \item A Patent must be invented/applied/examined by or assigned for at least one Inventor, Applicant, Examiner or Assignee
@@ -70,7 +68,7 @@ We want to build a citation network for patents with these constraints:
 
 \begin{frame}
 \frametitle{Conceptual Model}
-Based on the scenario, we have design this conceptual model.
+Based on the scenario, we have designed this conceptual model.
 \begin{center}
 \includegraphics[height=2in]{full_er.png}
 \end{center}
@@ -86,7 +84,7 @@ Due to time constraint, we use this conceptual model to implement the citation n
 
 \begin{frame}
 \frametitle{Logical Model - Neo4j}
-Neo4j use the concepts of \textbf{Nodes}, \textbf{Properties} and \textbf{Relationships} as shown in the picture below, where:
+Neo4j use the concept of \textbf{Nodes}, \textbf{Properties} and \textbf{Relationships} as shown in the picture below, where:
 \begin{itemize}
 \item Nodes: PATENT, INVENTOR
 \item Properties: Nodes and Relationships attributes, such as Patent\_No or Cited\_date
@@ -101,13 +99,13 @@ Neo4j use the concepts of \textbf{Nodes}, \textbf{Properties} and \textbf{Relati
 \frametitle{Logical Model - Neo4j (Cont.)}
 Pros:
 \begin{itemize}
-\item Can cope with complex and highly connected data
+\item Can cope with complex relationship
 \item Offers more accurate ways to determine the relationship between each entity
 \end{itemize}
 Cons:
 \begin{itemize}
 \item Slow with complex search
-\item Server is not supported for visualizing more than 1000 rows
+\item Built-in Web Server is not supported for visualizing more than 1000 rows
 \end{itemize}
 \end{frame}
 
@@ -129,13 +127,13 @@ Pros:
 \end{itemize}
 Cons:
 \begin{itemize}
-\item Does not support identify duplication
+\item Does not support relationship
 \end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{CINAS Structure}
-Our CINAS will follow the structure below, starts from the Patent XML File and ends at Neo4j DB and MongoDB
+Our CINAS will follow the structure below, starts from the Patent XML File and ends at \textbf{Neo4J DB and MongoDB as our data storages}.
 \begin{center}
 \includegraphics[height=2in]{cinas.png}
 \end{center}
@@ -188,13 +186,12 @@ Pseudocode for \textbf{POST in Neo4jDBConnector}:
 \end{frame}
 
 \begin{frame}
-\frametitle{Data Visualization}
-Data Visualization Process:
+\frametitle{Citation Network Visualization}
+For Citation Network Visualization, we wrote \textbf{generate\_csv} to automate the process:
 \begin{enumerate}
-\item Submit a query to database server
-\item Receive a JSON Response
-\item Generate CSV File from JSON Response
-\item Use GEPHI to load CSV and visualize data
+\item Assuming that Neo4J is populated using \textbf{DB Client}
+\item Run \textbf{generate\_csv} will results in 2 csv files : nodes.csv and links.csv
+\item Use GEPHI to load these files and visualize the data
 \end{enumerate}
 \begin{center}
 \includegraphics[height=2in]{gephi.png}
@@ -225,7 +222,7 @@ Total & 110343\\ \hline
 
 \begin{frame}
 \frametitle{Results (Cont.)}
-The figure shows Patent Classification in October 2014.\\~\\
+The figure illustrates Patent Classification in October 2014.\\~\\
 The MISCELLANEOUS (\textbf{D99}) industry were blossomed in October 2014
 \begin{center}
 \includegraphics[height=2in]{rplot-classification.png}
@@ -235,7 +232,7 @@ The MISCELLANEOUS (\textbf{D99}) industry were blossomed in October 2014
 \begin{frame}
 \frametitle{Citation Network}
 The figure shows a citation network with 500 patents in the database.\\~\\
-D0714930, D0714929 and D0714813 were the three most cite other patents corresponding to their node's radius.
+D0714930, D0714929 and D0714813 were the most popular in rank based on connected components.
 \begin{center}
 \includegraphics[height=2.6in]{citation-label.png}
 \end{center}
@@ -257,7 +254,7 @@ We perform the time measurements on 500 patents with total of 12016 citations.\\
 Results:
 \begin{itemize}
 \item \textbf{DOM} parser is \textbf{faster} than \textbf{SAX}
-\item \textbf{OGM} is \textbf{faster} than \textbf{REST}, but \textbf{REST} is \textbf{simpler} than OGM
+\item \textbf{Object-Mapping} is \textbf{faster} than \textbf{REST}, but \textbf{REST} is \textbf{easier to extend} than Object-Mapping
 \item Populate data in \textbf{MongoDB} is \textbf{faster} than \textbf{Neo4j}, but the drawback is MongoDB client has to implement references between documents
 \end{itemize}
 \columnbreak
@@ -266,7 +263,31 @@ Results:
 \end{center}
 \end{multicols}
 \end{frame}
+%--------------------------------------------------
+\section{Lesson Learned}
+%--------------------------------------------------
+\begin{frame}
+\frametitle{Table of Contents}
+\tableofcontents[currentsection]
+\end{frame}
 
+\begin{frame}
+\frametitle{Lesson}
+\begin{itemize}
+\item Choice of technology
+	\begin{itemize}
+	\item Analyzing citation network with Neo4J is much simpler than MongoDB \& RDBMS.
+	\item Neo4J web server only visualizes up to 1000 rows.
+	\item Object-Mapping is faster and easier to use than REST. However, REST is more suitable for scalable system that involves different languages \& platforms that communicate via JSON. 
+	\item Drawbacks of Normalization in RDBMS since it can't fully represent the natural language . Hence, we chose MongoDB to store data.
+	\end{itemize}
+\item Patent
+	\begin{itemize}
+		\item It's inevitable that patent can help identify the trend of inventions in one country's industry.
+		\item Further analysis may take into account the backward citation and forward citation to identify the trend on time basis.
+	\end{itemize}
+\end{itemize}
+\end{frame}
 %--------------------------------------------------
 \section{Future works}
 %--------------------------------------------------

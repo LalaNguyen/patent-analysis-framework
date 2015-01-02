@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.12.22)  23 DEC 2014 15:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  2 JAN 2015 10:40
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1003,57 +1003,57 @@ LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <4> not available
 
 ] [6
 
-] <full_er.png, id=220, 963.6pt x 441.65pt>
+] <full_er.png, id=228, 963.6pt x 441.65pt>
 File: full_er.png Graphic file (type png)
  <use full_er.png>
-Package pdftex.def Info: full_er.png used on input line 77.
+Package pdftex.def Info: full_er.png used on input line 75.
 (pdftex.def)             Requested size: 315.35709pt x 144.54pt.
  [7
 
- <./full_er.png (PNG copy)>] <implemented_er.png, id=249, 881.2925pt x 579.1637
+ <./full_er.png (PNG copy)>] <implemented_er.png, id=257, 881.2925pt x 579.1637
 6pt>
 File: implemented_er.png Graphic file (type png)
 
 <use implemented_er.png>
-Package pdftex.def Info: implemented_er.png used on input line 85.
+Package pdftex.def Info: implemented_er.png used on input line 83.
 (pdftex.def)             Requested size: 219.9326pt x 144.54pt.
  [8
 
  <./implemented_er.png>]
-<neo4j.png, id=278, 703.62875pt x 294.09875pt>
+<neo4j.png, id=286, 703.62875pt x 294.09875pt>
 File: neo4j.png Graphic file (type png)
  <use neo4j.png>
-Package pdftex.def Info: neo4j.png used on input line 98.
+Package pdftex.def Info: neo4j.png used on input line 96.
 (pdftex.def)             Requested size: 311.22955pt x 130.08621pt.
  [9
 
  <./neo4j.png>] [10
 
-] <mongodb.png, id=333, 614.295pt x 707.64375pt>
+] <mongodb.png, id=341, 614.295pt x 707.64375pt>
 File: mongodb.png Graphic file (type png)
  <use mongodb.png>
-Package pdftex.def Info: mongodb.png used on input line 120.
+Package pdftex.def Info: mongodb.png used on input line 118.
 (pdftex.def)             Requested size: 163.11546pt x 187.90244pt.
 
 [11
 
  <./mongodb.png>] [12
 
-] <cinas.png, id=388, 693.59125pt x 559.08875pt>
+] <cinas.png, id=396, 693.59125pt x 559.08875pt>
 File: cinas.png Graphic file (type png)
 
 <use cinas.png>
-Package pdftex.def Info: cinas.png used on input line 142.
+Package pdftex.def Info: cinas.png used on input line 140.
 (pdftex.def)             Requested size: 179.31346pt x 144.54pt.
  [13
 
  <./cinas.png>] [14
 
 ]
-<dbclient.png, id=443, 417.56pt x 316.18124pt>
+<dbclient.png, id=451, 417.56pt x 316.18124pt>
 File: dbclient.png Graphic file (type png)
  <use dbclient.png>
-Package pdftex.def Info: dbclient.png used on input line 163.
+Package pdftex.def Info: dbclient.png used on input line 161.
 (pdftex.def)             Requested size: 190.88846pt x 144.54pt.
  [15
 
@@ -1061,75 +1061,75 @@ Package pdftex.def Info: dbclient.png used on input line 163.
 
 ] [17
 
-] <gephi.png, id=523, 832.10875pt x 389.455pt>
+] <gephi.png, id=531, 832.10875pt x 389.455pt>
 File: gephi.png Graphic file (type png)
 
 <use gephi.png>
-Package pdftex.def Info: gephi.png used on input line 202.
+Package pdftex.def Info: gephi.png used on input line 199.
 (pdftex.def)             Requested size: 308.81499pt x 144.54pt.
  [18
 
  <./gephi.png>] (./presentation.toc) [19
 
 ]
-LaTeX Font Info:    Try loading font information for U+msa on input line 224.
+LaTeX Font Info:    Try loading font information for U+msa on input line 221.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 224.
+LaTeX Font Info:    Try loading font information for U+msb on input line 221.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Try loading font information for OT1+mathkerncmss on input 
-line 224.
+line 221.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/sansmathaccent/ot1mathkerncmss.fd
 File: ot1mathkerncmss.fd 2013/03/27 Fontinst v1.933 font definitions for OT1/ma
 thkerncmss.
 ) [20
 
-] <rplot-classification.png, id=609, 676.5275pt x 408.52625pt>
+] <rplot-classification.png, id=618, 676.5275pt x 408.52625pt>
 File: rplot-classification.png Graphic file (type png)
 
 <use rplot-classification.png>
-Package pdftex.def Info: rplot-classification.png used on input line 233.
+Package pdftex.def Info: rplot-classification.png used on input line 230.
 (pdftex.def)             Requested size: 239.35858pt x 144.54pt.
  [21
 
  <./rplot-classification.png>]
-<citation-label.png, id=637, 1027.84pt x 1027.84pt>
+<citation-label.png, id=646, 1027.84pt x 1027.84pt>
 File: citation-label.png Graphic file (type png)
  <use citation-label.png>
-Package pdftex.def Info: citation-label.png used on input line 242.
+Package pdftex.def Info: citation-label.png used on input line 239.
 (pdftex.def)             Requested size: 187.88899pt x 187.90244pt.
 
-Overfull \vbox (23.36104pt too high) detected at line 242
+Overfull \vbox (23.36104pt too high) detected at line 239
  []
 
 [22
 
  <./citation-label.png>]
-<inventor-map.png, id=665, 657.45625pt x 342.27875pt>
+<inventor-map.png, id=674, 657.45625pt x 342.27875pt>
 File: inventor-map.png Graphic file (type png)
  <use inventor-map.png>
-Package pdftex.def Info: inventor-map.png used on input line 251.
+Package pdftex.def Info: inventor-map.png used on input line 248.
 (pdftex.def)             Requested size: 277.64456pt x 144.54pt.
 
-Overfull \vbox (7.19861pt too high) detected at line 251
+Overfull \vbox (7.19861pt too high) detected at line 248
  []
 
 [23
 
- <./inventor-map.png>] <line.png, id=693, 655.44875pt x 403.5075pt>
+ <./inventor-map.png>] <line.png, id=702, 655.44875pt x 403.5075pt>
 File: line.png Graphic file (type png)
 
 <use line.png>
-Package pdftex.def Info: line.png used on input line 268.
+Package pdftex.def Info: line.png used on input line 265.
 (pdftex.def)             Requested size: 171.14764pt x 105.35893pt.
 
-Overfull \hbox (5.0pt too wide) in paragraph at lines 268--268
+Overfull \hbox (5.0pt too wide) in paragraph at lines 265--265
  [] 
  []
 
@@ -1139,15 +1139,20 @@ Overfull \hbox (5.0pt too wide) in paragraph at lines 268--268
 
 ] [26
 
+] (./presentation.toc) [27
+
 ]
-Overfull \hbox (5.51985pt too wide) in paragraph at lines 298--298
+[28
+
+]
+Overfull \hbox (5.51985pt too wide) in paragraph at lines 319--319
 \OT1/cmss/m/n/10.95 http://abel.lis.illinois.edu/UPDC/USPTOPatentsDatabaseConst
 ruction.pdf, 
  []
 
-[27
+[29
 
-] [28
+] [30
 
 ]
 \tf@nav=\write6
@@ -1159,36 +1164,36 @@ ruction.pdf,
 \tf@snm=\write8
 \openout8 = `presentation.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 306.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 306.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 327.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 327.
  (./presentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 306.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 306.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 327.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 327.
 Package rerunfilecheck Info: File `presentation.out' has not changed.
-(rerunfilecheck)             Checksum: 39A675C43CFCA590307BADA067EBEEA9;185.
+(rerunfilecheck)             Checksum: 2078A21A2B7B3E04A3A4A745A07C6D5B;234.
 
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 1.0pt have occurred.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 306.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 327.
  ) 
 Here is how much of TeX's memory you used:
- 17050 strings out of 493117
- 328376 string characters out of 6135432
+ 17080 strings out of 493117
+ 328974 string characters out of 6135433
  396454 words of memory out of 5000000
- 20028 multiletter control sequences out of 15000+600000
+ 20051 multiletter control sequences out of 15000+600000
  10989 words of font info for 40 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,16n,62p,412b,651s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,16n,62p,412b,649s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb
 ></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb>
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></
 usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb>
-Output written on presentation.pdf (28 pages, 1561730 bytes).
+Output written on presentation.pdf (30 pages, 1568138 bytes).
 PDF statistics:
- 859 PDF objects out of 1000 (max. 8388607)
- 783 compressed objects within 8 object streams
- 61 named destinations out of 1000 (max. 500000)
- 166 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 928 PDF objects out of 1000 (max. 8388607)
+ 848 compressed objects within 9 object streams
+ 66 named destinations out of 1000 (max. 500000)
+ 180 words of extra memory for PDF output out of 10000 (max. 10000000)
 

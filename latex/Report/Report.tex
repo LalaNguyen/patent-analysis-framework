@@ -75,13 +75,15 @@ USPTO : United States Patent and Trademark Office\\
 
 \section{Conceptual Model (Analysis Task)}
 
-We want to build a system that can store and analyze patents from USPTO as described in figure~\ref{fig:erd}. A patent contains an unique Publication number, Publication type, Application number, Publication date, Filling date, Priority date, Fee status (Paid or Free), Title, Length of grant (years), Classification and some of its contents include Abstract, Images, Description and Claims. A patent may or may not cite any other patents; and it may or may not be cited by other patents. A patent must be invented by at least one Inventor, be applied by only one Applicant, be assigned for at least one Assignee and be examined by at least one Examiner. The system will identify Inventor, Applicant, Assignee and Examiner by four attributes, which are their first name, last name, city and country.
+We propose a system that can store and analyze patents from USPTO as described in figure~\ref{fig:erd}. A patent contains an unique Publication number, Publication type, Application number, Publication date, Filling date, Priority date, Fee status (Paid or Free), Title, Length of grant (years), Classification and some of its contents include Abstract, Images, Description and Claims. 
+
+A patent may or may not cite any other patents and it may or may not be cited by other patents. A patent must be invented by at least one Inventor, be applied by only one Applicant, be assigned for at least one Assignee and be examined by at least one Examiner. The system will identify Inventor, Applicant, Assignee and Examiner by four attributes, which are their first name, last name, city and country.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\textwidth]{erd.png}
 \caption{ PatentDB Conceptual Model} \label{fig:erd}
 \end{figure}\par
-Due to limited resources, instead of implementing the complete system, we chose the simple modelling to convey the operations of CINAS. The database is called PatentDB which has only two entities, inventor and patent. The relationship between entities and its attribute are illustrated in figure~\ref{fig:conceptual}.\\~\\
+Due to limited resources, instead of implementing the complete system, we chose the simple modelling to convey the operations of CINAS. The database, called PatentDB, has only two entities, Inventor and Patent. The relationships between entities and its attribute are illustrated in figure~\ref{fig:conceptual}.\\~\\
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\textwidth]{conceptual_model.eps}
@@ -89,8 +91,8 @@ Due to limited resources, instead of implementing the complete system, we chose 
 \end{figure}\par~\\
 Rules are simple as follow:
 \begin{itemize}
-  \item An inventor may invent many patents and many inventors can work on the same one
-  \item A patent might be cited by other patents or may refer to many patents
+  \item An Inventor may invent many patents and many inventors can work on the same patent
+  \item A Patent might be cited by other patents or may refer to many patents
 \end{itemize}
 
 %----------------------------------------------------------------------------------------
@@ -140,9 +142,9 @@ inventor_schema={
 }
 \end{lstlisting}
 
-As we design, the \textbf{patent\_schema} is \textbf{embedded with} the \textbf{inventor\_schema in inventors} key, as described from line 12 to 15 in listing 1.\par
+The \textbf{inventor\_schema} is \textbf{embedded within} the \textbf{patent\_schema}, as described from line 12 to 15 in listing 1.\par
 In general, embedding provides better performance for read operations, as well as the ability to request and retrieve related data in a single database operation. Embedded data models make it possible to update related data in a single atomic write operation.\par
-However, embedding related data in documents may lead to situations where documents grow after creation. Document growth can impact write performance and lead to data fragmentation. We would use reference for patent's citations. However, client-side applications must issue follow-up queries to resolve the references.
+In contrast, embedding related data in documents may lead to situations where documents grow after creation. Document growth can impact write performance and lead to data fragmentation and thus, we would use reference for patent's citations since it contains a lot of information.
 
 %----------------------------------------------------------------------------------------
 
@@ -175,7 +177,7 @@ The core of Grant Parser script is PatentHandler class, class diagram of it is s
  \item Finally, an option to export the entire file to JSON format is available if chosen.
 \end{enumerate}
 
-An implementation using DOM tree is also documented solely for benchmark's comparison and thus, detailed explanations are beyond the scope of this study.
+An implementation using DOM tree is also documented solely for benchmark's comparison and thus, detailed explanations are beyond the scope of this report.
 
 \subsection{DB Client Module}
 Instead of using OM for particular database, we chose to \textbf{deploy REST services as mean of communication with our backends}. It is complicated to wrap OM around another OM, but it is simple to wrap data around HTTP response and request before forwarding. Therefore this approach provides more scalable solution than OM. Despite the fact that \textbf{this approach might limit the performance speed, it is worth a trade-off for being more extendable}. The figure~\ref{fig:db_client} illustrates class diagram of our DB Client module.
@@ -186,9 +188,9 @@ Instead of using OM for particular database, we chose to \textbf{deploy REST ser
 \caption{ DB Client Class Diagram \label{fig:db_client}}
 \end{figure}
 
-The idea is to create an abstract layer to hide the presence of multi-databases systems. Instead of choosing ODM for MongoDB or OGM for Neo4J, we created an data layers to a enhance the transparency. For example, to issue a POST request to whatever the backend is, developers currently only need to concern the differences between resources and query format (commonly JSON). The complexity underlying will be handled by each corresponding connectors. As can be seen from figure \ref{fig:db_client}, \textbf{all the fundamental HTTP methods are implemented in HTTPService}. MongoDBConnector and Neo4jDBConnector inherit private methods from its parent. 
+The idea is to create an abstract layer to hide the presence of multi-databases systems. Instead of choosing ODM for MongoDB or OGM for Neo4J, we created an data layers to a enhance the transparency. For example, to issue a POST request to whatever the backend is, developers currently only need to concern the differences between resources. The complexity underlying will be handled by each corresponding connectors. It's important to mention that Eve REST\footnote{http://python-eve.org/} is built on top of HTTPService provided by Kenneth Reitz Project\footnote{http://docs.python-requests.org/en/latest/user/quickstart/} and MongoDBConnector and Neo4jDBConnector inherit private methods from its parent. 
 
-It's important to note that we need to handle with cares for MongoDB as it's susceptible to data redundancy and inconsistency due to being no schema DB. In addition, MongoDB requires an object ID to make a legitimate references. In specific, for a patent to make references, it should store the objectID of patent instead of proposed patent ID. From our opinions, we think this is unnecessary and generate extra workload for conversions. Hence, we \textbf{use embedded to represent the relationships between patent}. 
+We should not overlook MongoDB as it's susceptible to data redundancy and inconsistency due to being no schema DB. In addition, MongoDB requires an object ID to make a legitimate references. In specific, for a patent to make references, it should store the objectID of patent instead of proposed patent ID. From our opinions, we think this is unnecessary and generate extra workload for conversions. Hence, we \textbf{use embedded to represent the relationships between patent}. 
 
 Regarding the duplication in MongoDB, considering this case where patent 08852195 actually refer to WO2005/069809 twice at line 329 and line 330\footnote{http://www.directorypatent.com/US/08852195.html}, it's inevitable that we might have data redundancies to some extents. Even though it's more acceptable to treat them as one entity, we would consider it in our next stage of implementation due to time constraint.
 
@@ -213,7 +215,7 @@ The procedure of \textbf{POST in Neo4J is much more simpler}, since Neo4J has an
 %----------------------------------------------------------------------------------------
 
 \section{Results (End-User Functionalities Task)}
-Contemporarily, CINAS has processed up to 110343 so-called patents. Table~\ref{table:summarize} shows the summarized statistic of patent database.
+Contemporarily, CINAS has processed up to 110343 so-called patents. Table~\ref{table:summarize} shows the summarized statistic of patent database that we manually extracted from MongoDB database.
 \begin{table}[!h]
 \begin{center}
 \begin{tabular}{|c|c|l|} \hline
@@ -273,7 +275,7 @@ D1 & EDIBLE PRODUCTS\\ \hline
 \caption{ Patent Classification October 2014 }\label{fig:rplot}
 \end{figure}
 
-From figure~\ref{fig:rplot} and table~\ref{tab:class}, it is immediately striking that inventions for MISCELLANEOUS (D99) industry were blossomed in October 2014. In specific, nearly 2500 granted patents (accounted for nearly 83\%) makes non-trivial goods production industry become the most popular topic among the invention community. In addition, this might signal a competitive field for any inventors that shall want to take part in. On the opposite, classification that are larger than 20 were recorded at lowest level, except for the case of  MEDICAL AND LABORATORY EQUIPMENT (D24), ENVIRONMENTAL HEATING AND COOLING; FLUID HANDLING AND SANITARY EQUIPMENT (D23) and LIGHTING(26) where number of inventions are relatively close to those in range of 1x (approx. 100). In general, involving in these fields might be less competitive than the others. Even though coming in second place of the ladder, RECORDING, COMMUNICATION, OR INFORMATION RETRIEVAL EQUIPMENT's inventions (D14) are accounted for merely 6.66\%, in other words, 15 times smaller than the dominant D99. Interestingly, this also indicates the need for more robust information retrieval system is significant and thus, was main motivation for this study. Following D14 closely was TOOLS AND HARDWARE (D8) which received 150 attentions. Finally, we  also witness the insignificant presence of inventions in various class among 1x and 0x. As promised, statistics and bar chart was computed and generated using R.
+From figure~\ref{fig:rplot} and table~\ref{tab:class}, it is immediately striking that inventions for MISCELLANEOUS (D99) industry were blossomed in October 2014. In specific, nearly 2500 granted patents (accounted for nearly 83\%) makes non-trivial goods production industry become the most popular topic among the invention community. In addition, this might signal a competitive field for any inventors that shall want to take part in. On the opposite, classification that are larger than 20 were recorded at lowest level, except for the case of  MEDICAL AND LABORATORY EQUIPMENT (D24), ENVIRONMENTAL HEATING AND COOLING; FLUID HANDLING AND SANITARY EQUIPMENT (D23) and LIGHTING(26) where number of inventions are relatively close to those in range of 1x (approx. 100). In general, involving in these fields might be less competitive than the others. Even though coming in second place of the ladder, RECORDING, COMMUNICATION, OR INFORMATION RETRIEVAL EQUIPMENT's inventions (D14) are accounted for merely 6.66\%, in other words, 15 times smaller than the dominant D99. Interestingly, this also indicates the need for more robust information retrieval system is significant and thus, was main motivation for this study. Following D14 closely was TOOLS AND HARDWARE (D8) which received 150 attentions. Finally, we  also witness the insignificant presence of inventions in various class among 1x and 0x. \textbf{These statistics and bar chart was computed and generated using R and R-connector to MongoDB}.
 
 \subsection{Citations Network}
 
@@ -368,7 +370,7 @@ CINAS initially aims to provide more flexible and scalable solution for big pate
 
 It's important to note that CINAS is designed to be DBMS-independent. Specifically, the framework has special connectors working as drivers to different databases and thus, can fully take advantages of crossing-database's characteristics. For example, \textbf{to analyze a citation network in which contains nested relationships and thousand of nodes,  Neo4J is far superior than RDBMS}. Nonetheless, \textbf{Neo4J is remarkably slow when it comes to big data} as it stores additional attributes in the relationships between nodes and presents more complicated relationships between each node in comparison to RDBMS. Another example is \textbf{to analyze text-based field where MongoDB would take primary place because it has no schema enforced on data}. No schema would also mean no joining cost in term of relational and hence, provide more speed. 
 
-In this study, we present the method of obtaining citation network using Neo4j as back-end. Furthermore, we also show how valuable data can be extracted from MongoDB. The dramatical trade-off of this approach is that it would cost more memories, load-balance to maintain two different DBMS system within one host and hence, reducing overall speed. Having thought of that, we implemented CINAS using RESTful APIs to partially address those issues, we also compare the pros and cons with the ORM approach for references in implementation section. Even though it cannot overcome the speed of using ORM with direct-connection to the storage, it's worth mentioned in term of scalability.
+In this report, we present the method of obtaining citation network using Neo4j as back-end. Furthermore, we also show how valuable data can be extracted from MongoDB. The dramatical trade-off of this approach is that it would cost more memories, load-balance to maintain two different DBMS system within one host and hence, reducing overall speed. Having thought of that, we implemented CINAS using RESTful APIs to partially address those issues, we also compare the pros and cons with the ORM approach for references in implementation section. Even though it cannot overcome the speed of using ORM with direct-connection to the storage, it's worth mentioned in term of scalability.
 
 \subsection{Neo4j}
 Graph Database differs from RDB in the sense that a node itself is a "thing", not a table that holds many records. This provides a level of flexibility to represent data closer to the real world entity. Considering the following example where GDB overwhelms our traditional RDB, that's in a citation networks a patent is cited by many patents. Traditionally, RDB would maintain only single table, named Patent, with each record has an additional column to store foreign key. However, the fact that many patents can cite a single patent and a patent can be referred by many patents would leave us an M-to-N relationship and require a creation of second table. Suppose citations are limited to 1000 patents, which means cited patents and patents are reachable within our database, and each patent can refer up to 1000 patents. Clearly, 1000000 records should be stored inside our second table. Therefore, representing such a nested relationship with tabular system is not a scalable practice since we have more than millions of patents. The above problem can be addressed with 1000 nodes and 2000 relationship in GDB, this is much similar to what we usually think.
@@ -469,7 +471,7 @@ MongoDB avoids these complications through the use of a document data model. The
 
 \subsection{OM and REST services}
 
-\textbf{Object Mapping} is an layer over database to assist querying and managing data using an object paradigm. The \textbf{pros} of this method is that it hides the database query language syntax away from logic code. Following this manner, data models are gathered in one place and it's easier to update, maintain and reuse the code. Every databases have its different mapping methodology. For example, relational database will need object-relational-mapping while object-document mapping serves as driver between web applications with document-oriented database. The \textbf{drawback} of using OM is that OM tools generally stem from the high level of abstraction obscuring what is actually happening in the implementation code. Also, heavy reliance on OM software has been reported as a major factor in producing poorly designed databases. Furthermore, as we stated CINAS is database-indepedent, it's better to exchange data over more popular format such as JSON instead of binding to a specific database's language. Last but not least, OM does not provide neither enhanced security services as it has its own connection to the database, nor load-balancing. This would leave more works on the database's side.
+\textbf{Object Mapping} is an layer over database to assist querying and managing data using an object paradigm. The \textbf{pros} of this method is that it hides the database query language syntax away from logic code. Following this manner, data models are gathered in one place and it's easier to update, maintain and reuse the code. Every databases have its different mapping methodology. For example, relational database will need object-relational-mapping while object-document mapping serves as driver between web applications with document-oriented database. The \textbf{drawback} of using OM is that OM tools generally stem from the high level of abstraction obscuring what is actually happening in the implementation code. Also, heavy reliance on OM software has been reported as a major factor in producing poorly designed databases\footnote{http://en.wikipedia.org/wiki/Object-relational\_mapping}. Furthermore, as we stated CINAS is database-indepedent, it's better to exchange data over more popular format such as JSON instead of binding to a specific database's language. Last but not least, OM does not provide neither enhanced security services as it has its own connection to the database, nor load-balancing. This would leave more works on the database's side.
 
 \textbf{REST}, for REpresentational State Transfer, is a simple stateless architecture generally running over HTTP. REST has become the norm in past decades as the majority of developers would prefer this scalable solution\footnote{http://www.theserverside.com/feature/Why-developers-demand-resource-based-RESTful-APIs}.
 

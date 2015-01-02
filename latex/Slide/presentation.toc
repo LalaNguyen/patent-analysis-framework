@@ -2,4 +2,5 @@
 \beamer@sectionintoc {1}{Introduction}{3}{0}{1}
 \beamer@sectionintoc {2}{Implementation}{5}{0}{2}
 \beamer@sectionintoc {3}{Results}{19}{0}{3}
-\beamer@sectionintoc {4}{Future works}{25}{0}{4}
+\beamer@sectionintoc {4}{Lesson Learned}{25}{0}{4}
+\beamer@sectionintoc {5}{Future works}{27}{0}{5}
