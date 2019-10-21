@@ -13,7 +13,7 @@ PyYAML==3.11
 Pycco==0.3.0
 Pygments==2.0.1
 Sphinx==1.3b2
-Werkzeug==0.9.6
+Werkzeug==0.15.3
 argh==0.26.1
 arrow==0.4.4
 docopt==0.6.2
