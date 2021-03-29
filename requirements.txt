@@ -11,7 +11,7 @@ Markdown==2.5.2
 MarkupSafe==0.23
 PyYAML==3.11
 Pycco==0.3.0
-Pygments==2.0.1
+Pygments==2.7.4
 Sphinx==1.3b2
 Werkzeug==0.9.6
 argh==0.26.1
