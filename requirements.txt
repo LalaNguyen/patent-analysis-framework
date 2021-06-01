@@ -31,7 +31,7 @@ simplejson==3.5.2
 six==1.8.0
 smartypants==1.8.6
 snowballstemmer==1.2.0
-urllib3==1.10
+urllib3==1.26.5
 watchdog==0.8.2
 wsgiref==0.1.2
 xmlutils==1.1
